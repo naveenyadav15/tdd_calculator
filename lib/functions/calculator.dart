@@ -6,15 +6,24 @@ class CreateCalculator {
     int sum = 0;
     List<int> negatives = [];
     if (numbers.isEmpty) return sum;
-    String delimiter = ",";
+
+    List<String> delimiters = [",", "\n"];
     if (numbers.startsWith("//")) {
-      List<String> parts = numbers.split("\n");
-      delimiter = parts[0].substring(2);
-      delimiter = delimiter.substring(1, delimiter.length - 1);
-      numbers = parts.sublist(1).join("\n");
+      int endIndex = numbers.indexOf("\n");
+      String delimiterPart = numbers.substring(2, endIndex);
+
+      RegExp delimiterRegex = RegExp(r"\[(.*?)\]");
+      Iterable<Match> matches = delimiterRegex.allMatches(delimiterPart);
+
+      delimiters =
+          matches.map((match) => RegExp.escape(match.group(1)!)).toList();
+
+      numbers = numbers.substring(endIndex + 1);
     }
-    // ,\n || -\n || ,\\n
-    List<String> numberStrings = numbers.split(RegExp("[$delimiter\n]"));
+
+    String delimiterPattern = delimiters.join("|");
+    List<String> numberStrings = numbers.split(RegExp(delimiterPattern));
+
     for (int i = 0; i < numberStrings.length; i++) {
       if (numberStrings[i].isEmpty) continue;
       int parsedNumber = int.parse(numberStrings[i]);
@@ -23,6 +32,7 @@ class CreateCalculator {
       }
       if (parsedNumber < 1000) sum += parsedNumber;
     }
+
     if (negatives.isNotEmpty) {
       throw Exception(
           "Negative values are not allowed: ${negatives.join(",")}");

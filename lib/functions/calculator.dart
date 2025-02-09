@@ -18,6 +18,14 @@ class CreateCalculator {
     }
     // ,\n || -\n || ,\\n
     List<String> numberStrings = numbers.split(RegExp("[$delimiter\n]"));
-    return numberStrings.fold(0, (sum, number) => sum + int.parse(number));
+    for (int i = 0; i < numberStrings.length; i++) {
+      if (numberStrings[i].isEmpty) continue;
+      int parsedNumber = int.parse(numberStrings[i]);
+      if (parsedNumber < 0) {
+        throw Exception("Negative values are not allowed: $parsedNumber");
+      }
+      sum += parsedNumber;
+    }
+    return sum;
   }
 }

@@ -10,6 +10,7 @@ class CreateCalculator {
     if (numbers.startsWith("//")) {
       List<String> parts = numbers.split("\n");
       delimiter = parts[0].substring(2);
+      delimiter = delimiter.substring(1, delimiter.length - 1);
       numbers = parts.sublist(1).join("\n");
     }
     // ,\n || -\n || ,\\n

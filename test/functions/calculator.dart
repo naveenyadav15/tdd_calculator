@@ -12,15 +12,15 @@ void main() {
     int result = CreateCalculator().addString(numbers);
     expect(result, 15);
   });
-  test("Check delimiters", () {
-    String numbers = "//;\n1;2;3";
+  test("Updated delimiters", () {
+    String numbers = "//[***]\n1***2***3";
 
     int result = CreateCalculator().addString(numbers);
     expect(result, 6);
   });
 
   test("Add negative value throws exception", () {
-    String numbers = "//;\n1;-2;3";
+    String numbers = "//[;]\n1;-2;3";
 
     expect(
       () => CreateCalculator().addString(numbers),
@@ -31,7 +31,7 @@ void main() {
   });
 
   test("Add multiple negative value throw exception for all values", () {
-    String numbers = "//;\n1;-2;-3";
+    String numbers = "//[;]\n1;-2;-3";
     expect(
         () => CreateCalculator().addString(numbers),
         throwsA(predicate((e) =>

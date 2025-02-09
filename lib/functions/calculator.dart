@@ -20,7 +20,7 @@ class CreateCalculator {
       if (parsedNumber < 0) {
         negatives.add(parsedNumber);
       }
-      sum += parsedNumber;
+      if (parsedNumber < 1000) sum += parsedNumber;
     }
     if (negatives.isNotEmpty) {
       throw Exception(

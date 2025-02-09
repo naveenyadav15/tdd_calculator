@@ -44,4 +44,10 @@ void main() {
             e is Exception &&
             e.toString().contains("Negative values are not allowed: -2,-3"))));
   });
+
+  test("Calculate how many times addString is called", () {
+    CreateCalculator().addString("1,2");
+    CreateCalculator().addString("3,4");
+    expect(() => CreateCalculator().getCalledCount(), 2);
+  });
 }

@@ -9,6 +9,7 @@ class CreateCalculator {
 
   int addString(String numbers) {
     int sum = 0;
+    List<int> negatives = [];
     if (numbers.isEmpty) return sum;
     String delimiter = ",";
     if (numbers.startsWith("//")) {
@@ -22,9 +23,13 @@ class CreateCalculator {
       if (numberStrings[i].isEmpty) continue;
       int parsedNumber = int.parse(numberStrings[i]);
       if (parsedNumber < 0) {
-        throw Exception("Negative values are not allowed: $parsedNumber");
+        negatives.add(parsedNumber);
       }
       sum += parsedNumber;
+    }
+    if (negatives.isNotEmpty) {
+      throw Exception(
+          "Negative values are not allowed: ${negatives.join(",")}");
     }
     return sum;
   }

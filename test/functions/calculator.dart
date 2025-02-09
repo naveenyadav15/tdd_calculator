@@ -32,7 +32,16 @@ void main() {
       () => CreateCalculator().addString(numbers),
       throwsA(predicate((e) =>
           e is Exception &&
-          e.toString().contains("Negative values are not allowed"))),
+          e.toString().contains("Negative values are not allowed: -2"))),
     );
+  });
+
+  test("Add multiple negative value throw exception for all values", () {
+    String numbers = "//;\n1;-2;-3";
+    expect(
+        () => CreateCalculator().addString(numbers),
+        throwsA(predicate((e) =>
+            e is Exception &&
+            e.toString().contains("Negative values are not allowed: -2,-3"))));
   });
 }

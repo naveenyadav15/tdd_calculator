@@ -9,10 +9,15 @@ class CreateCalculator {
 
   int addString(String numbers) {
     int sum = 0;
-    List<String> values = numbers.split(",").join("\n").split("\n").toList();
-    for (int i = 0; i < values.length; i++) {
-      sum += int.parse(values[i]);
+    if (numbers.isEmpty) return sum;
+    String delimiter = ",";
+    if (numbers.startsWith("//")) {
+      List<String> parts = numbers.split("\n");
+      delimiter = parts[0].substring(2);
+      numbers = parts.sublist(1).join("\n");
     }
-    return sum;
+    // ,\n || -\n || ,\\n
+    List<String> numberStrings = numbers.split(RegExp("[$delimiter\n]"));
+    return numberStrings.fold(0, (sum, number) => sum + int.parse(number));
   }
 }

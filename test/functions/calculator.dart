@@ -50,4 +50,11 @@ void main() {
     String numbers = "1,2,1000,1001";
     expect(CreateCalculator().addString(numbers), 3);
   });
+
+  test("Multiple delimiters support", () {
+    String numbers = "//[*][%]\n1*2%3";
+
+    int result = CreateCalculator().addString(numbers);
+    expect(result, 6);
+  });
 }

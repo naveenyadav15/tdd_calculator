@@ -18,4 +18,10 @@ void main() {
     int result = CreateCalculator().addString(numbers);
     expect(result, 15);
   });
+  test("Check delimiters", () {
+    String numbers = "//;\n1;2;3";
+
+    int result = CreateCalculator().addString(numbers);
+    expect(result, 6);
+  });
 }

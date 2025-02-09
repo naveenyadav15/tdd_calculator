@@ -24,4 +24,15 @@ void main() {
     int result = CreateCalculator().addString(numbers);
     expect(result, 6);
   });
+
+  test("Add negative value throws exception", () {
+    String numbers = "//;\n1;-2;3";
+
+    expect(
+      () => CreateCalculator().addString(numbers),
+      throwsA(predicate((e) =>
+          e is Exception &&
+          e.toString().contains("Negative values are not allowed"))),
+    );
+  });
 }

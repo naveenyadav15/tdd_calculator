@@ -1,13 +1,8 @@
 class CreateCalculator {
-  int add(List<int> numbers) {
-    int sum = 0;
-    for (int i = 0; i < numbers.length; i++) {
-      sum += numbers[i];
-    }
-    return sum;
-  }
+  int _addCalledCount = 0;
 
   int addString(String numbers) {
+    _addCalledCount++;
     int sum = 0;
     List<int> negatives = [];
     if (numbers.isEmpty) return sum;
@@ -32,5 +27,9 @@ class CreateCalculator {
           "Negative values are not allowed: ${negatives.join(",")}");
     }
     return sum;
+  }
+
+  int getCalledCount() {
+    return _addCalledCount;
   }
 }

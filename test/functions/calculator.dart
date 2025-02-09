@@ -2,12 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tdd_calculator/functions/calculator.dart';
 
 void main() {
-  test("Add integer numbers", () {
-    List<int> numbers = [1, 2, 3, 4, 5, 6];
-    int result = CreateCalculator().add(numbers);
-    expect(result, 21);
-  });
-
   test("Add String numbers with comma", () {
     String numbers = "1,2,3,4,5";
     int result = CreateCalculator().addString(numbers);
@@ -46,8 +40,9 @@ void main() {
   });
 
   test("Calculate how many times addString is called", () {
-    CreateCalculator().addString("1,2");
-    CreateCalculator().addString("3,4");
-    expect(() => CreateCalculator().getCalledCount(), 2);
+    CreateCalculator calculator = CreateCalculator();
+    calculator.addString("1,2");
+    calculator.addString("3,4");
+    expect(calculator.getCalledCount(), 2);
   });
 }

@@ -45,4 +45,9 @@ void main() {
     calculator.addString("3,4");
     expect(calculator.getCalledCount(), 2);
   });
+
+  test("Number above 1000 should be ignored", () {
+    String numbers = "1,2,1000,1001";
+    expect(CreateCalculator().addString(numbers), 3);
+  });
 }
